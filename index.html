@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Villa Estela Cabarete – Villa moderne avec piscine privée</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="Villa Estela à Cabarete : villa moderne, lumineuse et haut de gamme avec piscine privée, à quelques minutes de Kite Beach.">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0ea5a3;
+      --primary-dark: #0b7d7b;
+      --sand: #f4efe7;
+      --dark: #0f172a;
+      --dark-soft: #1e293b;
+      --light: #ffffff;
+      --muted: #94a3b8;
+      --max-width: 1180px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 20px 50px rgba(15, 23, 42, 0.22);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--sand);
+      color: var(--dark);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+
+    .navbar-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .navbar-logo img {
+      height: 100px;
+    }
+
+    .navbar-logo span {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      color: #f8fafc;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 1.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+    }
+
+    .navbar-links a {
+      color: #f1f5f9;
+      position: relative;
+      padding-bottom: 0.2rem;
+    }
+
+    .navbar-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.25s ease;
+    }
+
+    .navbar-links a:hover::after {
+      width: 100%;
+    }
+
+    /* MENU MOBILE */
+    .mobile-menu-btn {
+      display: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn { display: block; }
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(14px);
+      padding: 5rem 2rem 2rem;
+      display: none;
+      flex-direction: column;
+      gap: 2rem;
+      z-index: 100;
+      animation: slideDown 0.35s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-menu a {
+      color: #f3f4f6;
+      font-size: 1.4rem;
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .mobile-menu-cta {
+      margin-top: 1rem;
+      padding: 1rem 1.4rem;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #0b1120;
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.4rem;
+      font-size: 2.2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* HERO IMMERSIF */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      color: var(--light);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.65));
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 780px;
+      padding: 0 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.8rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.6rem; }
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #e2e8f0;
+      margin-bottom: 2rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 1rem 1.8rem;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #0b1120;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 20px 40px rgba(14,165,163,0.35);
+    }
+
+    .btn-secondary {
+      padding: 1rem 1.8rem;
+      border-radius: 999px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-logo">
+      <img src="villa/logo.png" alt="Villa Estela">
+      <span>VILLA ESTELA</span>
+    </div>
+
+    <div class="navbar-links">
+      <a href="#about">La villa</a>
+      <a href="#features">Caractéristiques</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#calendrier">Disponibilités</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <button class="mobile-menu-btn" id="openMenu">Menu</button>
+  </div>
+</nav>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-close" id="closeMenu">&times;</div>
+
+  <a href="#about">La villa</a>
+  <a href="#features">Caractéristiques</a>
+  <a href="#galerie">Galerie</a>
+  <a href="#calendrier">Disponibilités</a>
+  <a href="#contact">Contact</a>
+
+  <a href="#calendrier" class="mobile-menu-cta">Voir les dates</a>
+</div>
+
+<!-- HERO IMMERSIF -->
+<header class="hero">
+  <div class="hero-slider" id="hero-slider">
+    <div class="hero-slide active" style="background-image:url('villa/1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/3.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/4.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/5.jpg')"></div>
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Votre villa moderne à Cabarete</h1>
+    <p class="hero-subtitle">
+      Un refuge tropical lumineux, avec piscine privée, à deux pas de Kite Beach.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#calendrier" class="btn-primary">Voir les disponibilités →</a>
+      <a href="#galerie" class="btn-secondary">Voir la galerie</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ABOUT -->
+  <section class="section" id="about" style="padding: 6rem 1.5rem;">
+    <div class="section-header" style="text-align:center; max-width:760px; margin:0 auto 3rem;">
+      <div class="section-kicker" style="font-family:'Poppins'; font-size:0.9rem; letter-spacing:0.15em; color:var(--primary); text-transform:uppercase; margin-bottom:0.6rem;">
+        La villa
+      </div>
+      <h2 class="section-title" style="font-family:'Poppins'; font-size:2.6rem; font-weight:600; color:var(--dark); margin-bottom:1rem;">
+        Vivre Cabarete, version Estela
+      </h2>
+      <p class="section-subtitle" style="font-size:1.15rem; color:var(--dark-soft);">
+        Une villa moderne, lumineuse et élégante, pensée pour offrir un séjour haut de gamme dans un cadre tropical apaisant.
+      </p>
+    </div>
+
+
+<div class="about-grid" style="max-width:var(--max-width); margin:0 auto;">
+
+      <div class="about-text" style="font-size:1.05rem; color:var(--dark-soft); line-height:1.8;">
+        <p style="margin-bottom:1.4rem;">
+          Villa Estela marie l’architecture contemporaine à la douceur des tropiques. Les grandes ouvertures, la terrasse ensoleillée et la piscine privée créent un espace de vie harmonieux où l’intérieur et l’extérieur se confondent naturellement.
+        </p>
+
+        <p style="margin-bottom:1.4rem;">
+          Située à Kite Beach, l’un des secteurs les plus prisés de Cabarete, la villa offre un cadre idéal pour les familles, les kitesurfeurs, les télétravailleurs et tous ceux qui recherchent un séjour haut de gamme dans un environnement paisible et sécuritaire.
+        </p>
+
+        <p style="margin-bottom:1.4rem;">
+          Le nom “Villa Estela” évoque le sillage — celui des kitesurfs glissant sur l’eau turquoise de Cabarete, et celui des patins sur la glace, clin d’œil à nos racines québécoises. Deux mondes qui se rencontrent ici, dans un lieu où l’on crée des souvenirs qui restent longtemps après le passage.
+        </p>
+
+        <div class="about-highlight" style="background:var(--light); padding:1.2rem 1.4rem; border-radius:var(--radius-md); box-shadow:var(--shadow-soft); font-weight:500; color:var(--dark-soft);">
+          Séjour minimum : 7 nuits · Occupation maximale : 8 personnes (dont un maximum de 6 adultes)
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features" style="padding: 6rem 1.5rem; background:var(--light);">
+    <div class="section-header" style="text-align:center; max-width:760px; margin:0 auto 3rem;">
+      <div class="section-kicker" style="font-family:'Poppins'; font-size:0.9rem; letter-spacing:0.15em; color:var(--primary); text-transform:uppercase; margin-bottom:0.6rem;">
+        Caractéristiques
+      </div>
+      <h2 class="section-title" style="font-family:'Poppins'; font-size:2.6rem; font-weight:600; color:var(--dark); margin-bottom:1rem;">
+        Tout ce qu’il faut pour un séjour parfait
+      </h2>
+      <p class="section-subtitle" style="font-size:1.15rem; color:var(--dark-soft);">
+        Une villa conçue pour être aussi agréable à vivre qu’à regarder.
+      </p>
+    </div>
+
+    <div class="features-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:2rem; max-width:var(--max-width); margin:0 auto;">
+      
+      <!-- Feature card -->
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          🛏️ 3 chambres climatisées
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Deux chambres avec lit king et une avec lit gigogne, toutes climatisées.
+        </div>
+      </div>
+
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          🛁 2.5 salles de bain
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Deux salles de bain complètes et une salle d’eau pour un confort optimal.
+        </div>
+      </div>
+
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          🏊 Piscine privée
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Un espace intime, parfait pour se rafraîchir après la plage ou une excursion.
+        </div>
+      </div>
+
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          🍳 Cuisine complète + extérieure
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Tout le nécessaire pour cuisiner à l’intérieur ou en plein air.
+        </div>
+      </div>
+
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          🔥 BBQ extérieur
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Idéal pour des soirées conviviales au bord de la piscine.
+        </div>
+      </div>
+
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          🧺 Laveuse
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Parfait pour les séjours prolongés ou en famille.
+        </div>
+      </div>
+
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          ⚡ Wi‑Fi haute vitesse
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Idéal pour le télétravail, les appels vidéo et le streaming.
+        </div>
+      </div>
+
+      <div class="feature-card" style="background:var(--sand); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+        <div class="feature-label" style="font-family:'Poppins'; font-size:1.2rem; font-weight:600; margin-bottom:0.6rem;">
+          🌴 Quartier calme et sécurisé
+        </div>
+        <div class="feature-note" style="color:var(--dark-soft); font-size:1rem;">
+          Un environnement paisible, tout en restant proche de l’action de Cabarete.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="section" id="galerie" style="padding:6rem 1.5rem;">
+    <div class="section-header" style="text-align:center; max-width:760px; margin:0 auto 3rem;">
+      <div class="section-kicker" style="font-family:'Poppins'; font-size:0.9rem; letter-spacing:0.15em; color:var(--primary); text-transform:uppercase; margin-bottom:0.6rem;">
+        Galerie
+      </div>
+      <h2 class="section-title" style="font-family:'Poppins'; font-size:2.6rem; font-weight:600; color:var(--dark); margin-bottom:1rem;">
+        Découvrir Villa Estela en images
+      </h2>
+      <p class="section-subtitle" style="font-size:1.15rem; color:var(--dark-soft);">
+        Une sélection de photos officielles de la villa, de la piscine et des espaces de vie.
+      </p>
+    </div>
+
+    <div class="gallery-wrapper" style="max-width:var(--max-width); margin:0 auto;">
+      <div class="gallery-grid" id="gallery" 
+           style="columns:3 300px; column-gap:1rem;">
+        
+        <img src="villa/1.jpg" alt="Villa Estela - Vue extérieure" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/2.jpg" alt="Villa Estela - Piscine privée" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/3.jpg" alt="Villa Estela - Salon" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/4.jpg" alt="Villa Estela - Cuisine" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/5.jpg" alt="Villa Estela - Chambre" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/6.jpg" alt="Villa Estela - Salle de bain" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/7.jpg" alt="Villa Estela - Terrasse" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/8.jpg" alt="Villa Estela - Espace extérieur" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/9.jpg" alt="Villa Estela - Détails" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/10.jpg" alt="Villa Estela - Ambiance" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/11.jpg" alt="Villa Estela - Espace de vie" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/12.jpg" alt="Villa Estela - Piscine de nuit" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+        <img src="villa/13.jpg" alt="Villa Estela - Vue générale" style="width:100%; margin-bottom:1rem; border-radius:var(--radius-md); cursor:pointer;">
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" 
+       style="position:fixed; inset:0; background:rgba(0,0,0,0.85); display:none; align-items:center; justify-content:center; z-index:200;">
+    
+    <span id="lightbox-close" 
+          style="position:absolute; top:2rem; right:2rem; font-size:3rem; color:#fff; cursor:pointer;">&times;</span>
+
+    <span id="lightbox-prev" 
+          style="position:absolute; left:2rem; font-size:3rem; color:#fff; cursor:pointer;">&#10094;</span>
+
+    <img id="lightbox-img" alt="" 
+         style="max-width:90%; max-height:80%; border-radius:var(--radius-md); box-shadow:var(--shadow-soft);">
+
+    <span id="lightbox-next" 
+          style="position:absolute; right:2rem; font-size:3rem; color:#fff; cursor:pointer;">&#10095;</span>
+  </div>
+
+
+<section id="map" style="padding:4rem 1.5rem;">
+  <div style="max-width:var(--max-width); margin:0 auto;">
+    <h2 style="font-family:'Poppins'; font-size:2rem; margin-bottom:1rem; color:var(--dark);">
+      Localisation de la villa
+    </h2>
+
+    <iframe
+      src="https://www.google.com/maps?q=19.762875620116702,-70.42745400453111&z=16&output=embed"
+      width="100%"
+      height="450"
+      style="border:0; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+  <!-- CALENDRIER -->
+  <section class="section" id="calendrier" style="padding:6rem 1.5rem;">
+    <div class="section-header" style="text-align:center; max-width:760px; margin:0 auto 3rem;">
+      <div class="section-kicker" style="font-family:'Poppins'; font-size:0.9rem; letter-spacing:0.15em; color:var(--primary); text-transform:uppercase; margin-bottom:0.6rem;">
+        Disponibilités
+      </div>
+      <h2 class="section-title" style="font-family:'Poppins'; font-size:2.6rem; font-weight:600; color:var(--dark); margin-bottom:1rem;">
+        Consulter le calendrier
+      </h2>
+      <p class="section-subtitle" style="font-size:1.15rem; color:var(--dark-soft);">
+        Vérifiez les dates disponibles pour Villa Estela.<br>
+        <strong>Note : Si rien n'est inscrit à une date, c'est disponible! </strong> 
+      </p>
+    </div>
+
+    <div style="display:flex; justify-content:center; margin-top:1rem;">
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=villa.estela.cabarete%40gmail.com&ctz=America%2FToronto"
+        style="border:0; width:100%; max-width:900px; height:700px; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);"
+        frameborder="0"
+        scrolling="no">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" style="padding:6rem 1.5rem;">
+    <div class="section-header" style="text-align:center; max-width:760px; margin:0 auto 3rem;">
+      <div class="section-kicker" style="font-family:'Poppins'; font-size:0.9rem; letter-spacing:0.15em; color:var(--primary); text-transform:uppercase; margin-bottom:0.6rem;">
+        Contact
+      </div>
+      <h2 class="section-title" style="font-family:'Poppins'; font-size:2.6rem; font-weight:600; color:var(--dark); margin-bottom:1rem;">
+        Planifier votre séjour à Villa Estela
+      </h2>
+      <p class="section-subtitle" style="font-size:1.15rem; color:var(--dark-soft);">
+        Indiquez vos dates, le nombre de personnes et vos besoins. Nous vous répondrons rapidement.
+      </p>
+    </div>
+
+    <div class="contact-card" style="max-width:700px; margin:0 auto; background:var(--light); padding:2.5rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); font-size:1.1rem; color:var(--dark-soft); line-height:1.8;">
+      <p style="margin-bottom:1rem;">
+        Pour toute demande d’information ou de réservation, écrivez‑nous à :
+      </p>
+
+      <p style="margin-bottom:1.4rem;">
+        <strong>Email :</strong><br>
+        <a href="mailto:villa.estela.cabarete@gmail.com" style="color:var(--primary); font-weight:600;">
+          villa.estela.cabarete@gmail.com
+        </a>
+      </p>
+
+      <p style="margin-bottom:1rem;">
+        Vous pouvez également nous joindre via notre page Facebook.
+      </p>
+
+      <p>
+        Plus vous nous donnez de détails (dates, nombre d’adultes/enfants, besoins particuliers),
+        plus nous pouvons vous répondre précisément.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" style="padding:6rem 1.5rem; background:var(--sand);">
+    <div class="section-header" style="text-align:center; max-width:760px; margin:0 auto 3rem;">
+      <div class="section-kicker" style="font-family:'Poppins'; font-size:0.9rem; letter-spacing:0.15em; color:var(--primary); text-transform:uppercase; margin-bottom:0.6rem;">
+        FAQ
+      </div>
+      <h2 class="section-title" style="font-family:'Poppins'; font-size:2.6rem; font-weight:600; color:var(--dark); margin-bottom:1rem;">
+        Questions fréquentes
+      </h2>
+      <p class="section-subtitle" style="font-size:1.15rem; color:var(--dark-soft);">
+        Voici les réponses aux questions les plus souvent posées avant de réserver.
+      </p>
+    </div>
+
+    <div class="faq-list" style="max-width:800px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;">
+
+      <!-- FAQ ITEM -->
+      <div class="faq-item" style="background:var(--light); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); overflow:hidden;">
+        <button class="faq-question" style="width:100%; padding:1.4rem 1.6rem; background:none; border:none; text-align:left; font-size:1.2rem; font-family:'Poppins'; font-weight:500; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          Où est située Villa Estela ?
+          <span class="faq-icon" style="font-size:1.6rem; color:var(--primary);">+</span>
+        </button>
+        <div class="faq-answer" style="display:none; padding:0 1.6rem 1.4rem; font-size:1.05rem; color:var(--dark-soft);">
+          Villa Estela est située à Kite Beach, Cabarete, à moins de 5 minutes à pied de la plage
+          et à environ 20 minutes de l’aéroport de Puerto Plata (POP).
+        </div>
+      </div>
+
+      <div class="faq-item" style="background:var(--light); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); overflow:hidden;">
+        <button class="faq-question" style="width:100%; padding:1.4rem 1.6rem; background:none; border:none; text-align:left; font-size:1.2rem; font-family:'Poppins'; font-weight:500; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          Combien de personnes peuvent séjourner à la villa ?
+          <span class="faq-icon" style="font-size:1.6rem; color:var(--primary);">+</span>
+        </button>
+        <div class="faq-answer" style="display:none; padding:0 1.6rem 1.4rem; font-size:1.05rem; color:var(--dark-soft);">
+          La villa compte 3 chambres, deux avec lit king et une avec lit gigogne, ainsi qu’un sofa‑lit dans le salon.
+          L’occupation maximale est de 8 personnes, dont un maximum de 6 adultes.
+        </div>
+      </div>
+
+      <div class="faq-item" style="background:var(--light); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); overflow:hidden;">
+        <button class="faq-question" style="width:100%; padding:1.4rem 1.6rem; background:none; border:none; text-align:left; font-size:1.2rem; font-family:'Poppins'; font-weight:500; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          La piscine est‑elle privée ?
+          <span class="faq-icon" style="font-size:1.6rem; color:var(--primary);">+</span>
+        </button>
+        <div class="faq-answer" style="display:none; padding:0 1.6rem 1.4rem; font-size:1.05rem; color:var(--dark-soft);">
+          Oui. La piscine est entièrement privée et réservée aux occupants de la villa.
+        </div>
+      </div>
+
+      <div class="faq-item" style="background:var(--light); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); overflow:hidden;">
+        <button class="faq-question" style="width:100%; padding:1.4rem 1.6rem; background:none; border:none; text-align:left; font-size:1.2rem; font-family:'Poppins'; font-weight:500; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          Quels sont les tarifs ?
+          <span class="faq-icon" style="font-size:1.6rem; color:var(--primary);">+</span>
+        </button>
+        <div class="faq-answer" style="display:none; padding:0 1.6rem 1.4rem; font-size:1.05rem; color:var(--dark-soft);">
+          Les tarifs sont à la semaine, en dollars canadiens.  
+          Des rabais sont offerts pour les séjours prolongés.<br><br>
+          <strong>1er avril au 31 août :</strong> 1200&nbsp;$<br>
+          <strong>1er septembre au 30 novembre :</strong> 900&nbsp;$<br>
+          <strong>1er décembre au 17 décembre :</strong> 1500&nbsp;$<br>
+          <strong>18 décembre au 3 janvier :</strong> 2100&nbsp;$<br>
+          <strong>4 janvier au 31 mars :</strong> 1500&nbsp;$
+        </div>
+      </div>
+
+      <div class="faq-item" style="background:var(--light); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); overflow:hidden;">
+        <button class="faq-question" style="width:100%; padding:1.4rem 1.6rem; background:none; border:none; text-align:left; font-size:1.2rem; font-family:'Poppins'; font-weight:500; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          Comment réserver ?
+          <span class="faq-icon" style="font-size:1.6rem; color:var(--primary);">+</span>
+        </button>
+        <div class="faq-answer" style="display:none; padding:0 1.6rem 1.4rem; font-size:1.05rem; color:var(--dark-soft);">
+          Contactez‑nous par courriel à <strong>villa.estela.cabarete@gmail.com</strong><br>
+          ou via notre page Facebook.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer style="background:var(--dark); color:#fff; padding:2.5rem 1.5rem;">
+  <div class="footer-inner" style="max-width:var(--max-width); margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    
+    <div class="footer-left" style="font-size:0.95rem; opacity:0.85;">
+      © <span id="year"></span> Villa Estela – Cabarete, République dominicaine.
+    </div>
+
+    <div class="footer-right">
+      <a href="https://www.facebook.com/EstelaCabarete" target="_blank" style="display:flex; align-items:center; gap:0.6rem; color:#fff;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffffff" viewBox="0 0 24 24">
+          <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
+          23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.414c0-3.1 
+          1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 
+          0-1.796.715-1.796 1.763v2.316h3.587l-.467 3.696h-3.12V24h6.116C23.403 
+          24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
+        </svg>
+        <span>Suivez‑nous sur Facebook</span>
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+  // Année dans le footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // MENU MOBILE
+  const openMenu = document.getElementById('openMenu');
+  const closeMenu = document.getElementById('closeMenu');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  openMenu.addEventListener('click', () => mobileMenu.style.display = 'flex');
+  closeMenu.addEventListener('click', () => mobileMenu.style.display = 'none');
+
+  // HERO slider
+  const slides = document.querySelectorAll('.hero-slide');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+  }
+
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }, 7000);
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.parentElement;
+      const answer = item.querySelector('.faq-answer');
+      const icon = item.querySelector('.faq-icon');
+
+      const isOpen = answer.style.display === 'block';
+
+      answer.style.display = isOpen ? 'none' : 'block';
+      icon.textContent = isOpen ? '+' : '−';
+    });
+  });
+
+  // Lightbox
+  const galleryImages = document.querySelectorAll('#gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = galleryImages[index].src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+  }
+
+  galleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => openLightbox(index));
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', showPrev);
+  lightboxNext.addEventListener('click', showNext);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display !== 'flex') return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+</script>
+
+</body>
+</html>
